@@ -4,7 +4,7 @@ import fs from "fs";
 
 
 const openai = new OpenAI({
-    apiKey: "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",
+    apiKey: process.env.OPENAI_API_KEY,
     dangerouslyAllowBrowser: true
 });
 
