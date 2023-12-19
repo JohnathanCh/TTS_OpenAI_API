@@ -1,8 +1,10 @@
 import OpenAI from 'openai';
 import fs from "fs";
 
+
+
 const openai = new OpenAI({
-    apiKey: process.env.OPENAI_API_KEY,
+    apiKey: "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",
     dangerouslyAllowBrowser: true
 });
 
@@ -28,14 +30,15 @@ async function getAnswer(question) {
     
     const completion = await openai.chat.completions.create({
         messages: [
-            {"role": "system", "content": "You are a helpful assistant."},
+            {"role": "system", "content": "You are a helpful assistant that gives short succint replies."},
             {"role": "user", "content": question}
         ],
         model: "gpt-4-1106-preview",
-        max_tokens: 60,
+        // max_tokens: 60,
     });
 
-    console.log("completion", completion);
+    console.log(".choices[0].message.content", completion.choices[0].message.content);
+    console.log("completion: ", completion);
     respondToAudio(completion.choices[0].message.content)
 }
 
@@ -44,8 +47,9 @@ async function getAnswer(question) {
 async function respondToAudio(input) {
     const mp3 = await openai.audio.speech.create({
         model: "tts-1",
-        voice: "alloy",
+        voice: "onyx",
         input: input,
+        speed: 0.5
       });
 
       const buffer = Buffer.from(await mp3.arrayBuffer());
