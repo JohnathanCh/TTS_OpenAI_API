@@ -1,6 +1,6 @@
 # Making A Speech To Speech AI Assistant With Node JS And The OpenAI API
 
-![Slide 1](./Slides/Whisper-%20Walkthrough%20Slide-1.png)
+![Slide 1](./Slides/Whisper-%20Walkthrough%20Slide-4.png)
 
 This article will walk you through how you can turn a user's audio prompt into text with Whisper. Then send that prompt to the OpenAI GPT and, when you get the response back, turn it back into audio with TTS. We will do all of this using Node JS and the OpenAI API. To supplement this article I have created an [interactive screencast](https://scrimba.com/scrim/cZ2QLwTG) (scrim) to walk you through the steps. I also suggest looking through the [OpenAI API reference](https://platform.openai.com/docs/api-reference/introduction) to get a better understanding of the tools we will be using.
 
@@ -23,7 +23,7 @@ const openai = new OpenAI({
 
 ## Transcribe User Audio Prompt
 
-![Slide 2](./Slides/Whisper-%20Walkthrough%20Slide-2.png)
+![Slide 2](./Slides/Whisper-%20Walkthrough%20Slide-1.png)
 
 Firstly we will demonstrate how to turn spoken word audio into text using the Whisper model. It is also good to follow along in the [API reference](https://platform.openai.com/docs/api-reference/audio/createTranscription) as we go over things. The API endpoint `openai.audio.transcriptions.create` accepts up to six request body attributes:
 
@@ -77,7 +77,7 @@ This will translate our audio to French, but you can use any language in ISO-639
 
 ## Sending The Transcription To The OpenAI GPT
 
-![Slide 3](./Slides/Whisper-%20Walkthrough%20Slide-3.png)
+![Slide 3](./Slides/Whisper-%20Walkthrough%20Slide-2.png)
 
 In the next step we will be sending the transcription text we just received from `openai.audio.transcriptions.create` to the `openai.chat.completions.create` endpoint. I very much suggest looking at the [API Reference](https://platform.openai.com/docs/api-reference/chat/create) to see all of your request body attributes for this endpoint because there are many:
 
@@ -157,7 +157,7 @@ Notice that the response has an attribute `finish_reason` that has a value of `"
 
 ## Create Speech From Response
 
-![Slide 4](./Slides/Whisper-%20Walkthrough%20Slide-4.png)
+![Slide 4](./Slides/Whisper-%20Walkthrough%20Slide-3.png)
 
 Lastly, we will turn the OpenAI GPT response into speech. Here is the [API Reference Docs](https://platform.openai.com/docs/api-reference/audio/createSpeech) portion pertaining to the `openai.audio.speech.create` endpoint, and here are the request body attributes:
 
@@ -192,6 +192,8 @@ await fs.promises.writeFile("./speech.mp3", buffer);
 ```
 
 If everything worked properly, we should have our speech saved in an audio file called `speech.mp3`, where we can then handle it accordingly.
+
+![Slide 1](./Slides/Whisper-%20Walkthrough%20Slide-4.png)
 
 ## Conclusion
 
